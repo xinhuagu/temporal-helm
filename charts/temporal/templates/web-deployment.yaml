@@ -38,6 +38,8 @@ spec:
     spec:
       {{ include "temporal.serviceAccount" . }}
       volumes:
+        - name: config-store
+          emptyDir: { }
         - name: {{ .Chart.Name }}-web-config
           configMap:
             name: {{ include "temporal.componentname" (list . "web") }}-config
@@ -46,6 +48,9 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}-web
+          volumeMounts:
+              - name: config-store
+                mountPath: ./config
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
           env:
@@ -66,7 +71,8 @@ spec:
           {{- end }}
           {{- with .Values.web.additionalVolumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
+            - name: config-store
+              mountPath: ./config
           {{- end }}
       {{- with .Values.web.securityContext }}
       securityContext:

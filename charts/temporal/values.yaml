@@ -20,8 +20,8 @@ server:
   enabled: true
   sidecarContainers: {}
   image:
-    repository: temporalio/server
-    tag: 1.22.4
+    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-server
+    tag: 1.22.4-patched
     pullPolicy: IfNotPresent
 
   # Global default settings (can be overridden per service)
@@ -85,8 +85,8 @@ server:
   additionalVolumeMounts: []
   additionalEnv: []
   securityContext:
-    fsGroup: 1000
-    runAsUser: 1000
+    fsGroup:
+    runAsUser:
 
   config:
     logLevel: "debug,info"
@@ -285,8 +285,8 @@ server:
 admintools:
   enabled: true
   image:
-    repository: temporalio/admin-tools
-    tag: 1.22.4
+    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-admin-tools
+    tag: 1.22.4-patched
     pullPolicy: IfNotPresent
 
   service:
@@ -305,7 +305,7 @@ admintools:
   podDisruptionBudget: {}
 
 web:
-  enabled: true
+  enabled: false
   config:
     # server/config.yml file content
     auth:
@@ -317,8 +317,8 @@ web:
   replicaCount: 1
 
   image:
-    repository: temporalio/ui
-    tag: 2.16.2
+    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-ui
+    tag: 2.16.2-patched
     pullPolicy: IfNotPresent
 
   service:
@@ -468,7 +468,7 @@ cassandra:
   persistence:
     enabled: false
   image:
-    repo: cassandra
+    repo: registry-int.rz.bankenit.de/impulsmg/cassandra
     tag: 3.11.3
     pullPolicy: IfNotPresent
   config:

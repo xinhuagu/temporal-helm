@@ -42,7 +42,7 @@ spec:
         {{- if or .Values.cassandra.enabled (eq (include "temporal.persistence.driver" (list $ "default")) "cassandra") (eq (include "temporal.persistence.driver" (list $ "visibility")) "cassandra") }}
         {{- if .Values.cassandra.enabled }}
         - name: check-cassandra-service
-          image: busybox
+          image: registry-int.rz.bankenit.de/impulsmg/busybox
           command: ['sh', '-c', 'until nslookup {{ include "cassandra.host" $ }}; do echo waiting for cassandra service; sleep 1; done;']
         - name: check-cassandra
           image: "{{ .Values.cassandra.image.repo }}:{{ .Values.cassandra.image.tag }}"
@@ -243,7 +243,7 @@ spec:
       initContainers:
         {{- if .Values.cassandra.enabled }}
         - name: check-cassandra-service
-          image: busybox
+          image: registry-int.rz.bankenit.de/impulsmg/busybox
           command: ['sh', '-c', 'until nslookup {{ include "cassandra.host" $ }}; do echo waiting for cassandra service; sleep 1; done;']
         - name: check-cassandra
           image: "{{ .Values.cassandra.image.repo }}:{{ .Values.cassandra.image.tag }}"

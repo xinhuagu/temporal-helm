@@ -55,7 +55,7 @@ spec:
       initContainers:
         {{- if $.Values.cassandra.enabled }}
         - name: check-cassandra-service
-          image: busybox
+          image: registry-int.rz.bankenit.de/impulsmg/busybox
           command: ['sh', '-c', 'until nslookup {{ include "cassandra.host" $ }}; do echo waiting for cassandra service; sleep 1; done;']
         - name: check-cassandra
           image: "{{ $.Values.cassandra.image.repo }}:{{ $.Values.cassandra.image.tag }}"
@@ -135,6 +135,8 @@ spec:
                port: rpc
           {{- end }}
           volumeMounts:
+            - name: config-store
+              mountPath: /etc/temporal/config
             - name: config
               mountPath: /etc/temporal/config/config_template.yaml
               subPath: config_template.yaml
@@ -157,6 +159,8 @@ spec:
       {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+        - name: config-store
+          emptyDir: { }
         - name: config
           configMap:
             name: "{{ include "temporal.componentname" (list $ $service) }}-config"
