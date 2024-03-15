@@ -305,7 +305,7 @@ admintools:
   podDisruptionBudget: {}
 
 web:
-  enabled: false
+  enabled: true
   config:
     # server/config.yml file content
     auth:
@@ -318,7 +318,7 @@ web:
 
   image:
     repository: registry-int.rz.bankenit.de/impulsmg/temporalio-ui
-    tag: 2.16.2-patched
+    tag: 2.22.3
     pullPolicy: IfNotPresent
 
   service:
@@ -377,10 +377,10 @@ web:
 
 schema:
   setup:
-    enabled: true
+    enabled: false
     backoffLimit: 100
   update:
-    enabled: true
+    enabled: false
     backoffLimit: 100
   resources: {}
   containerSecurityContext: {}

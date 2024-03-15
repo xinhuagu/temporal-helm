@@ -50,7 +50,7 @@ spec:
         - name: {{ .Chart.Name }}-web
           volumeMounts:
               - name: config-store
-                mountPath: ./config
+                mountPath: /home/ui-server/config
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
           env:
@@ -71,8 +71,7 @@ spec:
           {{- end }}
           {{- with .Values.web.additionalVolumeMounts }}
           volumeMounts:
-            - name: config-store
-              mountPath: ./config
+            {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.web.securityContext }}
       securityContext:
