@@ -20,7 +20,7 @@ server:
   enabled: true
   sidecarContainers: {}
   image:
-    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-server
+    repository: registry-int.rz.bankenit.de/impulsmanager/temporalio-server
     tag: 1.22.6
     pullPolicy: IfNotPresent
 
@@ -152,7 +152,7 @@ server:
           port: 3306
           database: "root"
           user: "root"
-          password: "T5CxNXKEEn"
+          password: "IB5n13nTC4"
           existingSecret: ""
           secretName: ""
           maxConns: 20
@@ -185,7 +185,7 @@ server:
           port: 3306
           database: "temporal_visibility"
           user: "root"
-          password: "T5CxNXKEEn"
+          password: "IB5n13nTC4"
           existingSecret: ""
           secretName: ""
           maxConns: 20
@@ -285,7 +285,7 @@ server:
 admintools:
   enabled: true
   image:
-    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-admin-tools
+    repository: registry-int.rz.bankenit.de/impulsmanager/temporalio-admin-tools
     tag: 1.22.6
     pullPolicy: IfNotPresent
 
@@ -317,7 +317,7 @@ web:
   replicaCount: 1
 
   image:
-    repository: registry-int.rz.bankenit.de/impulsmg/temporalio-ui
+    repository: registry-int.rz.bankenit.de/impulsmanager/temporalio-ui
     tag: 2.22.3
     pullPolicy: IfNotPresent
 
@@ -377,10 +377,10 @@ web:
 
 schema:
   setup:
-    enabled: false
+    enabled: true
     backoffLimit: 100
   update:
-    enabled: false
+    enabled: true
     backoffLimit: 100
   resources: {}
   containerSecurityContext: {}

@@ -37,6 +37,8 @@ spec:
       {{- end }}
     spec:
       {{ include "temporal.serviceAccount" . }}
+      imagePullSecrets:
+        - name: image-registry
       containers:
         - name: admin-tools
           image: "{{ .Values.admintools.image.repository }}:{{ .Values.admintools.image.tag }}"

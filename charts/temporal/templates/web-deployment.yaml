@@ -37,6 +37,8 @@ spec:
       {{- end }}
     spec:
       {{ include "temporal.serviceAccount" . }}
+      imagePullSecrets:
+        - name: image-registry
       volumes:
         - name: config-store
           emptyDir: { }

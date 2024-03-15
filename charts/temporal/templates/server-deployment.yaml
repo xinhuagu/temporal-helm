@@ -55,7 +55,7 @@ spec:
       initContainers:
         {{- if $.Values.cassandra.enabled }}
         - name: check-cassandra-service
-          image: registry-int.rz.bankenit.de/impulsmg/busybox
+          image: registry-int.rz.bankenit.de/impulsmanager/busybox
           command: ['sh', '-c', 'until nslookup {{ include "cassandra.host" $ }}; do echo waiting for cassandra service; sleep 1; done;']
         - name: check-cassandra
           image: "{{ $.Values.cassandra.image.repo }}:{{ $.Values.cassandra.image.tag }}"
@@ -81,6 +81,8 @@ spec:
         - name: {{ $.Chart.Name }}-{{ $service }}
           image: "{{ $.Values.server.image.repository }}:{{ $.Values.server.image.tag }}"
           imagePullPolicy: {{ $.Values.server.image.pullPolicy }}
+          imagePullSecrets:
+            - name: image-registry
           env:
             - name: POD_IP
               valueFrom:
