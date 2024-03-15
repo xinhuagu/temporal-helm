@@ -21,7 +21,7 @@ server:
   sidecarContainers: {}
   image:
     repository: registry-int.rz.bankenit.de/impulsmg/temporalio-server
-    tag: 1.22.4-patched
+    tag: 1.22.6
     pullPolicy: IfNotPresent
 
   # Global default settings (can be overridden per service)
@@ -286,7 +286,7 @@ admintools:
   enabled: true
   image:
     repository: registry-int.rz.bankenit.de/impulsmg/temporalio-admin-tools
-    tag: 1.22.4-patched
+    tag: 1.22.6
     pullPolicy: IfNotPresent
 
   service:
